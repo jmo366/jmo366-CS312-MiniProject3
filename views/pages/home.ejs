@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head'); %> 
+    <link href="/style.css" rel="stylesheet" type="text/css">
+  </head>
+  <body class="container">
+  
+  <header> 
+    <%- include('../partials/header'); %> 
+  </header>
+  <title>Blog Posts</title>
+</head>
+<body>
+  <h2>All Blog Posts</h2>
+  <ul>
+    <% if (posts.length === 0) { %>
+      <p>No posts available.</p>
+    <% } else { %>
+      <% posts.forEach(post => { %>
+        <li>
+          <h3><%= post.title %></h3>
+          <p><%= post.body %></p>
+          <p>By <%= post.creator_name %> on <%= post.date_created.toLocaleString() %></p>
+          <form action="/delete/<%= post.blog_id %>" method="POST">
+            <button type="submit">Delete</button>
+          </form>
+          <form action="/edit/<%= post.blog_id %>" methof ="GET">
+            <button type="submit"> Edit </button>
+          </form>
+        </li>
+      <% }); %>
+    <% } %>
+  </ul>
+
+  <footer>
+    <%- include('../partials/footer'); %>
+  </footer>
+</body>
+</html>
